@@ -1,4 +1,4 @@
-import User from "../models/user.model";
+import User from "./user.model";
 
 const userService = {
   findByName: async (name) => {
@@ -7,6 +7,9 @@ const userService = {
   findAll: async () => {
     return await User.find();
   },
+  findMe: async (email) => {
+    return await User.findOne({email: email})
+  }
 };
 
 export default userService;

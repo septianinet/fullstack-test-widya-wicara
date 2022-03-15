@@ -1,5 +1,3 @@
-import "core-js/stable";
-import "regenerator-runtime/runtime";
 import "dotenv/config";
 import app from "../app";
 import debugLib from "debug";
@@ -12,9 +10,11 @@ app.set("port", port);
 
 const server = http.createServer(app);
 
-mongoose.connect(process.env.MONGODB_URI, () => {
+mongoose.connect(process.env.MONGODB_URI,).then( () => {
   console.log("Connected to Database");
-});
+}).catch((error) => {
+  console.log(error)
+})
 
 server.listen(port);
 server.on("error", onError);
@@ -57,4 +57,6 @@ function onListening() {
   const addr = server.address();
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
+
+  
 }
