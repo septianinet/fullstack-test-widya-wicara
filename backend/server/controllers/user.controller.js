@@ -1,13 +1,14 @@
-import express from 'express'
-const router = express.Router();
+import userService from "../services/user.service";
 
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const userController = {
+  find: (req, res) => {
+    const name = req.query.name;
+    if (name) {
+      res.json(userService.findByName(name));
+    } else {
+      res.json(userService.findAll());
+    }
+  },
+};
 
-// POST Register user
-// POST Login
-// POST Save data user
-// GET profile
-
-export default router;
+export default userController;

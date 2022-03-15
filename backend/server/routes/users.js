@@ -1,9 +1,8 @@
-import express from 'express'
+import express from "express";
+import userController from "../controllers/user.controller";
 const router = express.Router();
 
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get("/", userController.find);
 
 // POST Register user
 // POST Login

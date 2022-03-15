@@ -1,20 +1,24 @@
-import app from '../app';
-import debugLib from 'debug';
-import http from 'http';
-import dotenv from 'dotenv';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import "dotenv/config";
+import app from "../app";
+import debugLib from "debug";
+import http from "http";
+import mongoose from "mongoose";
+const debug = debugLib("myapp:server");
 
-dotenv.config({path: '../config/config.env'})
-
-const debug = debugLib('myapp:server');
-
-const port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+const port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
 
 const server = http.createServer(app);
 
+mongoose.connect(process.env.MONGODB_URI, () => {
+  console.log("Connected to Database");
+});
+
 server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+server.on("error", onError);
+server.on("listening", onListening);
 
 function normalizePort(val) {
   const port = parseInt(val, 10);
@@ -30,21 +34,19 @@ function normalizePort(val) {
   return false;
 }
 function onError(error) {
-  if (error.syscall !== 'listen') {
+  if (error.syscall !== "listen") {
     throw error;
   }
 
-  const bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
 
   switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
       process.exit(1);
       break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
       process.exit(1);
       break;
     default:
@@ -53,8 +55,6 @@ function onError(error) {
 }
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  debug("Listening on " + bind);
 }
