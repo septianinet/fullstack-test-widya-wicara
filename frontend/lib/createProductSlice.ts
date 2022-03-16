@@ -8,7 +8,7 @@ const createProductSlice= (set:any, get:any) => ({
     set({edit: product, editMode: true})
   },
   fetchProducts: async (name: string) => {
-    const response = await api('http://localhost:3010/products', {method: 'GET'})
+    const response = await api('/products', {method: 'GET'})
     
     set({products: response.data.data});
   },
@@ -18,14 +18,14 @@ const createProductSlice= (set:any, get:any) => ({
       description: 'Some description',
       price: 1000
     }
-    const response = await api('http://localhost:3010/products', {method: 'POST', data: body, headers: {
+    const response = await api('/products', {method: 'POST', data: body, headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, })
     await get().fetchProducts();
   },
   deleteProduct: async (id: string) => {
-    const response = await api(`http://localhost:3010/products/${id}`, {method: 'DELETE', headers: {
+    const response = await api(`/products/${id}`, {method: 'DELETE', headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, })
@@ -36,7 +36,7 @@ const createProductSlice= (set:any, get:any) => ({
       name
     }
     const id = get().edit.id
-    const response = await api(`http://localhost:3010/products/${id}`, {method: 'PUT', headers: {
+    const response = await api(`/products/${id}`, {method: 'PUT', headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }, data: body})
