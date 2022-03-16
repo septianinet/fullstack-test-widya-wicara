@@ -5,12 +5,14 @@ import methodOverride from 'method-override';
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import cors from 'cors'
 import usersRouter from "./modules/users/users.route";
 import authRouter from "./modules/auth/auth.route";
 import productRouter from "./modules/products/product.route";
 
 const app = express();
 
+app.use(cors())
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -14,13 +14,9 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   gender: {
-    type: Number,
-    required: true
-  },
-  role: {
     type: String,
     required: true
-  }
+  },
 });
 
 UserSchema.methods = {

@@ -29,7 +29,10 @@ const authService = {
 
     const accessToken = jwt.sign({email: findUser.email, name: findUser.name}, process.env.JWT_SECRET_KEY)
     
-    return accessToken;
+    return {
+      user,
+      jwt: accessToken
+    };
   },
 };
 

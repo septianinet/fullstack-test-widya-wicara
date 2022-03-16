@@ -3,7 +3,6 @@ import productService from "./product.service";
 const productController = {
   create: async (req, res, next) => {
     // TODO: Add Validation
-
     try {
       const {name, description, price} = req.body;
       const product = await productService.insert({name, description, price})
