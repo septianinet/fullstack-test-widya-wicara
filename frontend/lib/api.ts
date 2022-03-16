@@ -1,7 +1,7 @@
 import axios, {AxiosRequestConfig} from 'axios';
 import {getSession} from 'next-auth/react'
 const api = axios.create({
-  baseURL: "http://localhost:3010"
+  baseURL: process.env.API_URL
 })
 
 api.interceptors.request.use(async(config:AxiosRequestConfig) => {
