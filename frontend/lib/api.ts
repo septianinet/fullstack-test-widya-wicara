@@ -1,7 +1,7 @@
 import axios, {AxiosRequestConfig} from 'axios';
 import {getSession} from 'next-auth/react'
 const api = axios.create({
-  baseURL: process.env.API_URL
+  baseURL: 'https://flowery-ecommerce-api.herokuapp.com'
 })
 
 api.interceptors.request.use(async(config:AxiosRequestConfig) => {
