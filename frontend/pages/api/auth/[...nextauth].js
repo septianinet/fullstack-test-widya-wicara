@@ -7,10 +7,11 @@ const providers = [
     name: 'Credentials',
     authorize: async (credentials) => {
       try {
-        const user = await axios.post('/auth/login', {
+        const user = await axios.post('https://flowery-ecommerce-api.herokuapp.com/auth/login', {
           email: credentials.email,
           password: credentials.password
         })
+        console.log(user)
         if (user) {
           return user.data
         } 
