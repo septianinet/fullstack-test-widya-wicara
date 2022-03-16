@@ -7,7 +7,7 @@ const providers = [
     name: 'Credentials',
     authorize: async (credentials) => {
       try {
-        const user = await axios.post('http://localhost:3010/auth/login', {
+        const user = await axios.post('/auth/login', {
           email: credentials.email,
           password: credentials.password
         })
