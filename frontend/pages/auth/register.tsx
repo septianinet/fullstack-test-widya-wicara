@@ -23,7 +23,7 @@ const Register:NextPage = () => {
   const [password, setPassword] = useState('')
   const router = useRouter()
   const handleRegister = () => {
-    axios.post(`$${process.env.API_URL}/auth/signup`, {
+    axios.post(`/auth/signup`, {
       name,
       gender,
       email,
